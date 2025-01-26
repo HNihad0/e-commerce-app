@@ -18,9 +18,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: title != null
           ? Padding(
-            padding: AppPaddings.a6,
-            child: Text(title!,style: TextStyle(fontSize: 26),),
-          )
+              padding: AppPaddings.a6,
+              child: Text(
+                title!,
+                style: TextStyle(fontSize: 26),
+              ),
+            )
           : null,
       actions: actions?.map((action) {
         return Padding(
@@ -28,7 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: DecoratedBox(
             decoration: BoxDecoration(
               border: Border.all(
-                color: Colors.grey, 
+                color: Colors.grey,
               ),
               borderRadius: AppRadiuses.a30,
             ),
