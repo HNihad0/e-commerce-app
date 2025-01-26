@@ -1,6 +1,6 @@
-import 'package:e_commerce_app/ui/screens/home/home_screen.dart';
-import 'package:e_commerce_app/ui/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'screens/splash/splash_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
