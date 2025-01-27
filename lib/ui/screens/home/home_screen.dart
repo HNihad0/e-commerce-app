@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/constants/app_colors.dart';
-import '../../../utils/constants/app_paddings.dart';
-import '../../../utils/constants/app_radiuses.dart';
 import '../../../utils/constants/app_texts.dart';
+import '../../../utils/extensions/num_extensions.dart';
 import '../../widgets/custom_app_bar.dart';
+import 'widgets/bilboard.dart';
+import 'widgets/custom_search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -26,30 +26,13 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 18.0),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: AppColors.whiteSmoke,
-            borderRadius: AppRadiuses.a16,
-            border: Border.all(
-              color: Colors.grey.shade300, 
-              width: 1,
-            ),
-          ),
-          child: Padding(
-            padding: AppPaddings.a6,
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                contentPadding:
-                    AppPaddings.a12,
-                border: InputBorder.none,
-                suffixIcon: Icon(
-                  Icons.search,
-                  color: AppColors.black,
-                ),
-              ),
-            ),
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            CustomSearchBar(),
+            20.h,
+            const ClearanceSalesBox(),
+          ],
         ),
       ),
     );
