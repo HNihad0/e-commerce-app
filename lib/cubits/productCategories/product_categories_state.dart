@@ -8,9 +8,9 @@ final class ProductCategoriesInitial extends ProductCategoriesState {}
 class ProductCategoriesLoading extends ProductCategoriesState {}
 
 class ProductCategoriesSuccess extends ProductCategoriesState {
-  ProductCategoriesSuccess(this.products);
+  ProductCategoriesSuccess(this.productCategories);
 
-  final List<String> products;
+  final List<String> productCategories;
 }
 
 class ProductCategoriesError extends ProductCategoriesState {

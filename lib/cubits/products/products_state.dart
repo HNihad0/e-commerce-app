@@ -8,9 +8,10 @@ class ProductsInitial extends ProductsState {}
 class ProductsLoading extends ProductsState {}
 
 class ProductsSuccess extends ProductsState {
-  ProductsSuccess(this.products);
-
   final List<ProductResponse> products;
+  final String? selectedCategory;
+
+  ProductsSuccess(this.products, {this.selectedCategory});
 }
 
 class ProductsError extends ProductsState {

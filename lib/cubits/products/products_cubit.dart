@@ -12,6 +12,7 @@ class ProductsCubit extends Cubit<ProductsState> {
   ProductsCubit(this._productsRepo) : super(ProductsInitial());
 
   final ProductsRepo _productsRepo;
+  String? selectedCategory; 
 
   void getProducts() async {
     try {
@@ -24,4 +25,19 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsError(message: '$e'));
     }
   }
+
+  void filterProductsByCategory(String? category) {
+  if (state is ProductsSuccess) {
+    final allProducts = (state as ProductsSuccess).products;
+
+    // Seçili kategoriye göre filtrele
+    final filteredProducts = category == null || category.isEmpty
+        ? allProducts
+        : allProducts.where((product) => product.category == category).toList();
+
+    // Yeni durum yayınla
+    emit(ProductsSuccess(filteredProducts, selectedCategory: category));
+  }
+}
+
 }
