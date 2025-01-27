@@ -7,12 +7,12 @@ class AppTexts {
 
 
 
-  ///Drawer elements
-  static const String home = 'Ana səhifə';
+  ///AppBar texts
+  static const String homeAppBarTexts = 'Discover';
   
 
   //word combination
-  
+
 
   //Error texts
   static const String fieldError = 'Zəhmət olmasa xananı doldurdun!';
