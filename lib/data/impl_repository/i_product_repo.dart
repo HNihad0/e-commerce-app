@@ -9,4 +9,8 @@ class IProductsRepo implements ProductsRepo {
 
   @override
   Future<List<ProductResponse>> getProducts() => _productsService.getProducts();
+  
+  @override
+  Future<List<String>> getCategories() => _productsService.getCategories();
+  
 }

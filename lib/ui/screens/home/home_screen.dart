@@ -43,11 +43,6 @@ class HomeScreen extends StatelessWidget {
               child: BlocConsumer<ProductsCubit, ProductsState>(
                 listener: (context, state) {
                   if (state is ProductsSuccess) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('All Products fetched successfully.'),
-                      ),
-                    );
                   } else if (state is ProductsNetworkError) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(

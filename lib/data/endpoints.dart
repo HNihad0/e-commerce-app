@@ -3,6 +3,8 @@ class Endpoints {
 
   static const String _productsURL = 'https://fakestoreapi.com'; //Products API URL
   static const String products = '$_productsURL/products';
+  static const String productCategories = '$_productsURL/products/categories';
+
 
 
 
