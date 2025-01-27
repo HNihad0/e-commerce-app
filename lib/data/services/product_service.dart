@@ -12,7 +12,7 @@ class ProductsService {
     final response = await http.get(url);
     if (response.statusCode.isSuccess) {
       final List data = jsonDecode(response.body);
-      return data.map((e) => ProductResponse.fromJson(e)).toList();
+      return data.map((product) => ProductResponse.fromJson(product)).toList();
     }
     throw Exception('Failed to get products.');
   }
