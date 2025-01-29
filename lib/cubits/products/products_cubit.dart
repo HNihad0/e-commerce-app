@@ -30,7 +30,6 @@ class ProductsCubit extends Cubit<ProductsState> {
   if (state is ProductsSuccess) {
     final allProducts = (state as ProductsSuccess).products;
 
-    // Seçili kategoriye göre filtrele
     final filteredProducts = category == null || category.isEmpty
         ? allProducts
         : allProducts.where((product) => product.category == category).toList();
