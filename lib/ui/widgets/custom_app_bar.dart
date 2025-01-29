@@ -6,16 +6,19 @@ import '../../utils/constants/app_radiuses.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final List<Widget>? actions;
+   final Color? backgroundColor;
 
   const CustomAppBar({
     super.key,
     this.title,
     this.actions,
+    this.backgroundColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: backgroundColor ?? Theme.of(context).appBarTheme.backgroundColor,
       title: title != null
           ? Padding(
               padding: AppPaddings.a6,
