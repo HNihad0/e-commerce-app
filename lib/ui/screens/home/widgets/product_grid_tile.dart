@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../cubits/favorite/favorite_cubit.dart';
 import '../../../../data/models/remote/product_response.dart';
 import '../../../../utils/constants/app_colors.dart';
 import '../../../../utils/constants/app_paddings.dart';
 import '../../../../utils/constants/app_radiuses.dart';
+import '../../../../utils/di/locator.dart';
 import '../../product/product_screen.dart';
 
 class ProductGridTile extends StatelessWidget {
@@ -20,9 +23,14 @@ class ProductGridTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProductDetailsPage(product: productResponse),
+            builder: (context) => BlocProvider(
+              create: (_) =>
+                  locator<FavoriteCubit>(), 
+              child: ProductDetailsPage(product: productResponse),
+            ),
           ),
         );
+        
       },
       child: GridTile(
         header: DecoratedBox(

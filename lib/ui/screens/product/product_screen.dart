@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../data/models/remote/product_response.dart';
+import '../../../cubits/favorite/favorite_cubit.dart';
 import '../../../../utils/constants/app_paddings.dart';
 import '../../../utils/constants/app_colors.dart';
 import '../../../utils/extensions/num_extensions.dart';
@@ -10,7 +12,6 @@ import 'widgets/select_chip.dart';
 class ProductDetailsPage extends StatelessWidget {
   final ProductResponse product;
   final ValueNotifier<int> selectedChipIndex = ValueNotifier<int>(-1);
-  final ValueNotifier<bool> isFavorite = ValueNotifier<bool>(false);
 
   ProductDetailsPage({super.key, required this.product});
 
@@ -22,25 +23,20 @@ class ProductDetailsPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          ValueListenableBuilder<bool>(
-            valueListenable: isFavorite,
-            builder: (context, isFav, _) {
-              return ElevatedButton(
+          BlocBuilder<FavoriteCubit, FavoriteState>(
+            builder: (context, state) {
+              final isFav = state.favorites.contains(product);
+              return IconButton(
                 onPressed: () {
-                  isFavorite.value = !isFav;
+                  context.read<FavoriteCubit>().toggleFavorite(product);
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.white,
-                  shape: CircleBorder(),
-                  padding: AppPaddings.a16,
-                ),
-                child: Icon(
-                  Icons.favorite,
-                  color: isFav ? AppColors.cinnabar : AppColors.grey, 
-                ),
+                icon: Icon(
+                isFav ? Icons.favorite : Icons.favorite_border,
+                color: isFav ? AppColors.cinnabar : AppColors.grey,
+                                ),
               );
             },
-          )
+          ),
         ],
       ),
       body: Padding(

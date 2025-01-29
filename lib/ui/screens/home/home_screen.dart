@@ -5,6 +5,8 @@ import '../../../cubits/productCategories/product_categories_cubit.dart';
 import '../../../cubits/products/products_cubit.dart';
 import '../../../utils/constants/app_texts.dart';
 import '../../../utils/extensions/num_extensions.dart';
+import '../../../utils/helpers/go.dart';
+import '../../../utils/helpers/pager.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/custom_navbar.dart';
 import '../../widgets/global_loading.dart';
@@ -25,9 +27,11 @@ class HomeScreen extends StatelessWidget {
         title: AppTexts.homeAppBarTexts,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Go.to(context, Pager.favorite);
+            },
             icon: const Icon(
-              Icons.shopping_bag,
+              Icons.favorite,
               size: 22,
             ),
           ),
