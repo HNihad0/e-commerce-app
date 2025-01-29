@@ -35,4 +35,14 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsSuccess(filteredProducts, selectedCategory: category));
     }
   }
+
+  void filterProductsByName(String query) {
+    if (state is ProductsSuccess) {
+      final filteredProducts = _allProducts
+          .where((product) => product.title!.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+
+      emit(ProductsSuccess(filteredProducts, selectedCategory: selectedCategory));
+    }
+  }
 }

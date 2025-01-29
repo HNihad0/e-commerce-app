@@ -6,6 +6,7 @@ import '../../../cubits/products/products_cubit.dart';
 import '../../../utils/constants/app_texts.dart';
 import '../../../utils/extensions/num_extensions.dart';
 import '../../widgets/custom_app_bar.dart';
+import '../../widgets/custom_navbar.dart';
 import '../../widgets/global_loading.dart';
 import 'widgets/bilboard.dart';
 import 'widgets/category_list.dart';
@@ -17,6 +18,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<int> selectedIndexNotifier = ValueNotifier<int>(0);
+
     return Scaffold(
       appBar: CustomAppBar(
         title: AppTexts.homeAppBarTexts,
@@ -36,7 +39,11 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              CustomSearchBar(),
+              CustomSearchBar(
+                onChanged: (query) {
+                  context.read<ProductsCubit>().filterProductsByName(query);
+                },
+              ),
               20.h,
               const ClearanceSalesBox(),
               StreamBuilder<ProductCategoriesState>(
@@ -79,6 +86,17 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: ValueListenableBuilder<int>(
+        valueListenable: selectedIndexNotifier,
+        builder: (context, selectedIndex, child) {
+          return BottomNavBar(
+            selectedIndex: selectedIndex,
+            onItemTapped: (index) {
+              selectedIndexNotifier.value = index;
+            },
+          );
+        },
       ),
     );
   }

@@ -31,7 +31,11 @@ class CustomSearchBar extends StatelessWidget {
         padding: AppPaddings.a6,
         child: TextField(
           controller: controller,
-          onChanged: onChanged,
+          onChanged: (query) {
+            if (onChanged != null) {
+              onChanged!(query);
+            }
+          },
           decoration: InputDecoration(
             hintText: hintText,
             contentPadding: AppPaddings.a12,
