@@ -32,33 +32,33 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 18.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CustomSearchBar(),
-            20.h,
-            const ClearanceSalesBox(),
-            StreamBuilder<ProductCategoriesState>(
-              stream: BlocProvider.of<ProductCategoriesCubit>(context).stream,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final state = snapshot.data;
-                  if (state is ProductsLoading) {
-                    return const GlobalLoading();
-                  } else if (state is ProductCategoriesSuccess) {
-                    return CategoryList(categories: state.productCategories);
-                  } else if (state is ProductCategoriesNetworkError) {
-                    return Text(state.message);
-                  } else if (state is ProductCategoriesError) {
-                    return Text(state.message);
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              CustomSearchBar(),
+              20.h,
+              const ClearanceSalesBox(),
+              StreamBuilder<ProductCategoriesState>(
+                stream: BlocProvider.of<ProductCategoriesCubit>(context).stream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final state = snapshot.data;
+                    if (state is ProductsLoading) {
+                      return const GlobalLoading();
+                    } else if (state is ProductCategoriesSuccess) {
+                      return CategoryList(categories: state.productCategories);
+                    } else if (state is ProductCategoriesNetworkError) {
+                      return Text(state.message);
+                    } else if (state is ProductCategoriesError) {
+                      return Text(state.message);
+                    }
                   }
-                }
-                return const SizedBox.shrink();
-              },
-            ),
-            15.h,
-            Expanded(
-              child: StreamBuilder<ProductsState>(
+                  return const SizedBox.shrink();
+                },
+              ),
+              15.h,
+              StreamBuilder<ProductsState>(
                 stream: BlocProvider.of<ProductsCubit>(context).stream,
                 builder: (_, snapshot) {
                   if (snapshot.hasData) {
@@ -76,8 +76,8 @@ class HomeScreen extends StatelessWidget {
                   return const SizedBox.shrink();
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
