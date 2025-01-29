@@ -23,8 +23,8 @@ class ProductGridView extends StatelessWidget {
         crossAxisSpacing: 16,
         mainAxisExtent: 230,
       ),
-      shrinkWrap: true, // GridView'un Column içinde doğru çalışmasını sağlar
-      physics: const NeverScrollableScrollPhysics(), // GridView'un kendi kaydırmasını kapatır
+      shrinkWrap: true, 
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (_, i) {
         final product = products[i];
         return ProductGridTile(productResponse: product);

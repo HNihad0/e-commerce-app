@@ -1,8 +1,6 @@
 import 'dart:io';
-
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../data/models/remote/product_response.dart';
 import '../../data/repository/products_repo.dart';
 
@@ -12,13 +10,14 @@ class ProductsCubit extends Cubit<ProductsState> {
   ProductsCubit(this._productsRepo) : super(ProductsInitial());
 
   final ProductsRepo _productsRepo;
-  String? selectedCategory; 
+  List<ProductResponse> _allProducts = []; 
+  String? selectedCategory;
 
   void getProducts() async {
     try {
       emit(ProductsLoading());
-      final products = await _productsRepo.getProducts();
-      emit(ProductsSuccess(products));
+      _allProducts = await _productsRepo.getProducts();
+      emit(ProductsSuccess(_allProducts, selectedCategory: null));
     } on SocketException {
       emit(ProductsNetworkError());
     } catch (e) {
@@ -27,16 +26,13 @@ class ProductsCubit extends Cubit<ProductsState> {
   }
 
   void filterProductsByCategory(String? category) {
-  if (state is ProductsSuccess) {
-    final allProducts = (state as ProductsSuccess).products;
+    if (state is ProductsSuccess) {
+      final filteredProducts = category == null
+          ? _allProducts
+          : _allProducts.where((product) => product.category == category).toList();
 
-    final filteredProducts = category == null || category.isEmpty
-        ? allProducts
-        : allProducts.where((product) => product.category == category).toList();
-
-    // Yeni durum yayınla
-    emit(ProductsSuccess(filteredProducts, selectedCategory: category));
+      selectedCategory = category;
+      emit(ProductsSuccess(filteredProducts, selectedCategory: category));
+    }
   }
-}
-
 }
