@@ -20,4 +20,6 @@ class AppColors {
   static const bisque = Color(0xffFFEEC1);
   static const aquamarine = Color(0xff0B8C7C);
 
+  static var primaryColor;
+
 }
